@@ -11,4 +11,8 @@ export class ProductItemComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  createRange(length: number): number[] {
+    return new Array(length).fill(0).map((item, index) => ++index);
+  }
 }

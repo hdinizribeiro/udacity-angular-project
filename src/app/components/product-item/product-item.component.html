@@ -1,6 +1,9 @@
-<div class="product-container">
+<div class="product-container" *ngIf="product.stock > 0">
   <img class="product-image" [src]="product.url" />
   <span>{{ product.name }}</span>
   <span>${{ product.price }}</span>
+  <select class="select-input">
+    <option *ngFor="let qty of createRange(product.stock)" [value]="qty">{{ qty }}</option>
+  </select>
   <button class="btn btn-primary">Add to cart</button>
 </div>

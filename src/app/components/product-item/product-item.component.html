@@ -7,9 +7,20 @@
   <span>{{ product.name }}</span>
   <span>${{ product.price }}</span>
   <select name="selectedQty" class="select-input" [(ngModel)]="selectedQty">
-    <option *ngFor="let qty of [1,2,3,4,5,6,7,8,9,10]" [ngValue]="qty">
+    <option *ngFor="let qty of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" [ngValue]="qty">
       {{ qty }}
     </option>
   </select>
-  <button class="btn btn-primary" (click)="addToCart()">Add to cart</button>
+  <button
+    class="btn btn-primary"
+    (click)="
+      addToCart.emit({
+        product: product,
+        quantity: selectedQty,
+        productId: product.id
+      })
+    "
+  >
+    Add to cart
+  </button>
 </div>

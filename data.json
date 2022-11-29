@@ -43,5 +43,21 @@
       "description": "Wear it with style!"
     }
   ],
-  "cart": []
+  "cart": [
+    {
+      "productId": 2,
+      "quantity": 5,
+      "id": 1
+    },
+    {
+      "productId": 1,
+      "quantity": 6,
+      "id": 2
+    },
+    {
+      "productId": 3,
+      "quantity": 3,
+      "id": 3
+    }
+  ]
 }

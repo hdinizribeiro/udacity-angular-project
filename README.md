@@ -1,27 +1,24 @@
 # UdacityMyStore
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.8.
+This is a project destinated to complete the angular module of FullStack Javascritpt Developer nanodegree.
+
+## Installation
+
+Run `npm install` to install package and dependencies
+Node version: 16.18.0
+Npm version: 8.19.2
+
+If you are using NVM run `nvm install` to install the required version.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+This project includes **json-server** to provide a fake REST api.
+Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Additional Info
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Json Server
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+This project includes the json server based on `data.json` file that is in root folder. This package emulates a REST api based on a json file, notice that the `data.json` file has two arrays `Products` and `Cart` these are the two entities managed by the applications.
+Also notice that to run the application it needs to run `npm start` instead of `ng serve` (check `package.json` file)

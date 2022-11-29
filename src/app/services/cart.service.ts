@@ -12,4 +12,10 @@ export class CartService {
   add(cartProduct: CartProduct): Observable<void> {
     return this.http.post<void>('http://localhost:3000/cart', cartProduct);
   }
+
+  get(): Observable<CartProduct[]> {
+    return this.http.get<CartProduct[]>(
+      'http://localhost:3000/cart?_expand=product'
+    );
+  }
 }

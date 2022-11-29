@@ -1,0 +1,129 @@
+<div class="cart-container">
+  <div class="empty-cart-message" *ngIf="cartItems.length == 0">Empty cart</div>
+  <div class="cart-panel" *ngIf="cartItems.length > 0">
+    <div class="cart-item" *ngFor="let item of cartItems">
+      <img class="img" [src]="item.product?.url" />
+      <div class="cart-item-details">
+        <span> {{ item.product?.name }}</span>
+        <span>${{ item.product?.price }} </span>
+        <span
+          >Ammount:<input
+            class="number-input"
+            type="text"
+            [(ngModel)]="item.quantity"
+        /></span>
+      </div>
+    </div>
+    <h4>Total: ${{ total() }}</h4>
+  </div>
+  <form #form="ngForm">
+    <label class="form-label">Full Name</label>
+    <br />
+    <input
+      name="fullName"
+      required
+      minlength="3"
+      maxlength="150"
+      class="form-margin"
+      type="text"
+      [(ngModel)]="checkoutInfo.fullName"
+      placeholder="(minimum 3 characters)"
+      #fullNameField="ngModel"
+    />
+    <span
+      class="validation"
+      *ngIf="
+        fullNameField.invalid &&
+        fullNameField.dirty &&
+        fullNameField.errors!['required']
+      "
+    >
+      Required
+    </span>
+    <span
+      class="validation"
+      *ngIf="
+        fullNameField.invalid &&
+        fullNameField.dirty &&
+        fullNameField.errors!['minlength']
+      "
+    >
+      Must contain at least 3 characters
+    </span>
+    <br />
+    <label class="form-label">Address</label>
+    <br />
+    <input
+      name="address"
+      required
+      minlength="6"
+      maxlength="250"
+      class="form-margin"
+      type="text"
+      [(ngModel)]="checkoutInfo.address"
+      placeholder="(minimum 6 characters)"
+      #addressField="ngModel"
+    />
+    <span
+      class="validation"
+      *ngIf="
+        addressField.invalid &&
+        addressField.dirty &&
+        addressField.errors!['required']
+      "
+    >
+      Required
+    </span>
+    <span
+      class="validation"
+      *ngIf="
+        addressField.invalid &&
+        addressField.dirty &&
+        addressField.errors!['minlength']
+      "
+    >
+      Must contain at least 6 characters
+    </span>
+    <br />
+    <label class="form-label">Credit card number</label>
+    <br />
+    <input
+      name="creditCard"
+      required
+      minlength="16"
+      maxlength="16"      
+      class="form-margin"
+      type="text"
+      [(ngModel)]="checkoutInfo.creditCard"
+      placeholder="(16-digit number)"
+      #creditCardField="ngModel"
+    />
+    <span
+      class="validation"
+      *ngIf="
+        creditCardField.invalid &&
+        creditCardField.dirty &&
+        creditCardField.errors!['required']
+      "
+    >
+      Required
+    </span>
+    <span
+      class="validation"
+      *ngIf="
+        creditCardField.invalid &&
+        creditCardField.dirty &&
+        creditCardField.errors!['minlength']
+      "
+    >
+      Must contain 16 characters
+    </span>
+    <br />
+    <input
+      type="submit"
+      [disabled]="form.invalid"
+      value="Submit"
+      class="btn btn-primary"
+    />
+  </form>
+</div>

@@ -9,6 +9,7 @@ import { ProductItemComponent } from './components/product-item/product-item.com
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './layout/header/header.component';
 import { FormsModule } from '@angular/forms';
+import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { FormsModule } from '@angular/forms';
     ProductListComponent,
     ProductItemComponent,
     HeaderComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

@@ -51,9 +51,14 @@
   ],
   "cart": [
     {
-      "productId": 1,
-      "quantity": 1,
+      "productId": 2,
+      "quantity": "4",
       "id": 1
+    },
+    {
+      "productId": 2,
+      "quantity": 1,
+      "id": 2
     }
   ]
 }

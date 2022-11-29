@@ -1,0 +1,21 @@
+<div class="detail-container">
+  <img class="img" [src]="product.url" />
+  <div class="detail-item">
+    <h3>{{ product.name }}</h3>
+    <br />
+    ${{ product.price }}
+    <br />
+    <select name="selectedQty" class="select-input" [(ngModel)]="selectedQty">
+      <option
+        *ngFor="let qty of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+        [ngValue]="qty"
+      >
+        {{ qty }}
+      </option>
+    </select>
+    <br />
+    <button class="btn btn-primary" (click)="addToCart()">Add to cart</button>
+    <br />
+    <a class="back-link" routerLink="/">← Back to product list</a>
+  </div>
+</div>

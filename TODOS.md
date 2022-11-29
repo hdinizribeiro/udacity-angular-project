@@ -3,6 +3,6 @@
 [] Find a way to define the host for apis
 [] Success message on add to cart
 [v] Fix to not allow duplicated products in cart
-[] Implement item detail
+[v] Implement item detail
 [] Mention that the json-server is being used in README.md file
 [] Use output to add products to cart?

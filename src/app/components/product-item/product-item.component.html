@@ -1,9 +1,13 @@
 <div class="product-container">
-  <img class="product-image" [src]="product.url" />
+  <img
+    class="product-image"
+    [src]="product.url"
+    [routerLink]="['/product', product.id]"
+  />
   <span>{{ product.name }}</span>
   <span>${{ product.price }}</span>
   <select name="selectedQty" class="select-input" [(ngModel)]="selectedQty">
-    <option *ngFor="let qty of createRange(10)" [ngValue]="qty">
+    <option *ngFor="let qty of [1,2,3,4,5,6,7,8,9,10]" [ngValue]="qty">
       {{ qty }}
     </option>
   </select>

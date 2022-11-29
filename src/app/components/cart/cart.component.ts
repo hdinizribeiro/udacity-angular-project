@@ -28,14 +28,24 @@ export class CartComponent implements OnInit {
   }
 
   calculateTotal(): void {
-    this.checkoutInfo.total = this.cartItems
-      .map((c) => (c.product?.price ?? 0) * c.quantity)
-      .reduce((prev, curr) => prev + curr);
+    if (this.cartItems.length > 0) {
+      this.checkoutInfo.total = this.cartItems
+        .map((c) => (c.product?.price ?? 0) * c.quantity)
+        .reduce((prev, curr) => prev + curr);
+    }
   }
 
   checkout() {
     this.cartService.reset().subscribe(() => {
       this.showConfirmation = true;
     });
+  }
+
+  changeQuantity(cartItem: CartProduct) {
+    this.cartService
+      .changeQuantity(cartItem.id ?? 0, cartItem.quantity)
+      .subscribe(() => {
+        this.calculateTotal();
+      });
   }
 }

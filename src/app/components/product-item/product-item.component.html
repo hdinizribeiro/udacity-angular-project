@@ -1,9 +1,9 @@
-<div class="product-container" *ngIf="product.stock > 0">
+<div class="product-container">
   <img class="product-image" [src]="product.url" />
   <span>{{ product.name }}</span>
   <span>${{ product.price }}</span>
-  <select class="select-input" [(ngModel)]="selectedQty">
-    <option *ngFor="let qty of createRange(product.stock)" [value]="qty">
+  <select name="selectedQty" class="select-input" [(ngModel)]="selectedQty">
+    <option *ngFor="let qty of createRange(10)" [ngValue]="qty">
       {{ qty }}
     </option>
   </select>

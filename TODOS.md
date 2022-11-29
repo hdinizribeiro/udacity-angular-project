@@ -4,3 +4,4 @@
 [] Success message on add to cart
 [] Fix to not allow duplicated products in cart
 [] Implement item detail
+[] Mention that the json-server is being used in README.md file

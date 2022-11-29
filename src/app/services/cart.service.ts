@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
+  catchError,
   concatAll,
   forkJoin,
   map,
@@ -17,8 +18,24 @@ import { CartProduct } from 'src/models/CartProduct';
 export class CartService {
   constructor(private http: HttpClient) {}
 
-  add(cartProduct: CartProduct): Observable<void> {
-    return this.http.post<void>('http://localhost:3000/cart', cartProduct);
+  add(cartProduct: CartProduct): Observable<Object> {
+    const endpoint = 'http://localhost:3000/cart';
+    return this.http
+      .get<CartProduct[]>(
+        `http://localhost:3000/cart?productId=${cartProduct.productId}&_page=1&_limit=1`
+      )
+      .pipe(
+        map((cartItems) => {
+          if (cartItems.length > 0) {
+            const item = cartItems[0];
+            item.quantity += cartProduct.quantity;
+            return this.http.patch(`${endpoint}/${item.id}`, { quantity: item.quantity });
+          } else {
+            return this.http.post(endpoint, cartProduct);
+          }
+        }),
+        concatAll()
+      );
   }
 
   get(): Observable<CartProduct[]> {
@@ -28,12 +45,6 @@ export class CartService {
   }
 
   reset(): Observable<Object> {
-    // return this.get().pipe(
-    //   map((cart) =>
-    //     forkJoin(cart.map((item) => this.http.delete(`http://localhost:3000/${item.id}`)))
-    //   )
-    // );
-
     return this.get().pipe(
       map((cart) =>
         forkJoin(
@@ -44,5 +55,11 @@ export class CartService {
       ),
       concatAll()
     );
+  }
+
+  changeQuantity(cartItemId: number, newQuantity: number) {
+    return this.http.patch(`http://localhost:3000/cart/${cartItemId}`, {
+      quantity: newQuantity,
+    });
   }
 }

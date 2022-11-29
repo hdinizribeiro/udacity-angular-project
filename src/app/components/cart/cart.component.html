@@ -12,22 +12,11 @@
             class="number-input"
             required
             min="0"
-            [max]="item.product?.stock ?? 0"
             type="number"
             [(ngModel)]="item.quantity"
-            (change)="calculateTotal()"
+            (change)="changeQuantity(item)"
             #amountField="ngModel"
         /></span>
-        <span
-          class="validation"
-          *ngIf="
-            amountField.invalid &&
-            amountField.dirty &&
-            amountField.errors!['max']
-          "
-        >
-          Out of stock
-        </span>
       </div>
     </div>
     <h4>Total: ${{ checkoutInfo.total }}</h4>

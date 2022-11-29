@@ -26,6 +26,8 @@ export class ProductItemComponent implements OnInit {
         productId: this.product.id,
         quantity: this.selectedQty,
       })
-      .subscribe();
+      .subscribe(() => {
+        alert(`${this.product.name} added to cart successfully`);
+      });
   }
 }

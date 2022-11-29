@@ -11,7 +11,7 @@
             name="quantity"
             class="number-input"
             required
-            min="0"
+            min="1"
             type="number"
             [(ngModel)]="item.quantity"
             (change)="changeQuantity(item)"
@@ -19,7 +19,7 @@
         /></span>
       </div>
     </div>
-    <h4>Total: ${{ checkoutInfo.total }}</h4>
+    <h4>Total: ${{ checkoutInfo.total | number: "1.2-2" }}</h4>
   </div>
   <form #form="ngForm" (ngSubmit)="checkout()">
     <label class="form-label">Full Name</label>

@@ -5,8 +5,11 @@
       Thank you, <span class="highlight">{{ checkoutInfo?.fullName }}</span>
     </div>
     <div class="confirmation-item">
-      Your $ <span class="highlight">{{ checkoutInfo?.total }}</span> is
-      confirmed!
+      Your $
+      <span class="highlight"
+        >${{ checkoutInfo?.total | number: "1.2-2" }}</span
+      >
+      is confirmed!
     </div>
     <div class="confirmation-item">
       Please allow 1-3 business day(s) for shipping

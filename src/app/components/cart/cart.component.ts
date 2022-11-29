@@ -14,17 +14,28 @@ export class CartComponent implements OnInit {
     address: '',
     creditCard: '',
     fullName: '',
+    total: 0,
   };
+  showConfirmation: boolean = false;
 
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
-    this.cartService.get().subscribe((cart) => (this.cartItems = cart));
+    this.cartService.get().subscribe((cart) => {
+      this.cartItems = cart;
+      this.calculateTotal();
+    });
   }
 
-  total(): number | undefined {
-    return this.cartItems
-      .map((c) => c.product?.price ?? 0 * c.quantity)
+  calculateTotal(): void {
+    this.checkoutInfo.total = this.cartItems
+      .map((c) => (c.product?.price ?? 0) * c.quantity)
       .reduce((prev, curr) => prev + curr);
+  }
+
+  checkout() {
+    this.cartService.reset().subscribe(() => {
+      this.showConfirmation = true;
+    });
   }
 }

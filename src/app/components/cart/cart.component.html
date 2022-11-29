@@ -1,22 +1,38 @@
-<div class="cart-container">
-  <div class="empty-cart-message" *ngIf="cartItems.length == 0">Empty cart</div>
-  <div class="cart-panel" *ngIf="cartItems.length > 0">
+<div class="empty-cart-message" *ngIf="cartItems.length == 0">Empty cart</div>
+<div class="cart-container" *ngIf="cartItems.length > 0 && !showConfirmation">
+  <div class="cart-panel">
     <div class="cart-item" *ngFor="let item of cartItems">
       <img class="img" [src]="item.product?.url" />
       <div class="cart-item-details">
         <span> {{ item.product?.name }}</span>
         <span>${{ item.product?.price }} </span>
         <span
-          >Ammount:<input
+          >Amount:<input
+            name="quantity"
             class="number-input"
-            type="text"
+            required
+            min="0"
+            [max]="item.product?.stock ?? 0"
+            type="number"
             [(ngModel)]="item.quantity"
+            (change)="calculateTotal()"
+            #amountField="ngModel"
         /></span>
+        <span
+          class="validation"
+          *ngIf="
+            amountField.invalid &&
+            amountField.dirty &&
+            amountField.errors!['max']
+          "
+        >
+          Out of stock
+        </span>
       </div>
     </div>
-    <h4>Total: ${{ total() }}</h4>
+    <h4>Total: ${{ checkoutInfo.total }}</h4>
   </div>
-  <form #form="ngForm">
+  <form #form="ngForm" (ngSubmit)="checkout()">
     <label class="form-label">Full Name</label>
     <br />
     <input
@@ -91,7 +107,7 @@
       name="creditCard"
       required
       minlength="16"
-      maxlength="16"      
+      maxlength="16"
       class="form-margin"
       type="text"
       [(ngModel)]="checkoutInfo.creditCard"
@@ -127,3 +143,7 @@
     />
   </form>
 </div>
+<app-confirmation
+  *ngIf="showConfirmation"
+  [checkoutInfo]="checkoutInfo"
+></app-confirmation>

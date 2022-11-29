@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgModel } from '@angular/forms';
 import { CartService } from 'src/app/services/cart.service';
-import { CartProduct } from 'src/models/CartProduct';
+import { CartItem } from 'src/models/CartProduct';
 import { CheckoutInfo } from 'src/models/CheckoutInfo';
 
 @Component({
@@ -9,7 +10,8 @@ import { CheckoutInfo } from 'src/models/CheckoutInfo';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  cartItems: CartProduct[] = [];
+  @ViewChild('amountField') ammountField: NgModel = {} as NgModel;
+  cartItems: CartItem[] = [];
   checkoutInfo: CheckoutInfo = {
     address: '',
     creditCard: '',
@@ -21,10 +23,7 @@ export class CartComponent implements OnInit {
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
-    this.cartService.get().subscribe((cart) => {
-      this.cartItems = cart;
-      this.calculateTotal();
-    });
+    this.loadCartItems();
   }
 
   calculateTotal(): void {
@@ -41,11 +40,30 @@ export class CartComponent implements OnInit {
     });
   }
 
-  changeQuantity(cartItem: CartProduct) {
+  changeQuantity(value: number, cartItem: CartItem) {
+    if (isNaN(value) || value <= 0) {
+      this.ammountField.reset(cartItem.quantity);
+      return;
+    }
+
+    cartItem.quantity = value;
     this.cartService
       .changeQuantity(cartItem.id ?? 0, cartItem.quantity)
       .subscribe(() => {
         this.calculateTotal();
       });
+  }
+
+  remove(item: CartItem) {
+    this.cartService.remove(item.id ?? 0).subscribe(() => {
+      this.loadCartItems();
+    });
+  }
+
+  private loadCartItems() {
+    this.cartService.get().subscribe((cart) => {
+      this.cartItems = cart;
+      this.calculateTotal();
+    });
   }
 }

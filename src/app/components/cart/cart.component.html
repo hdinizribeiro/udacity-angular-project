@@ -13,16 +13,17 @@
             required
             min="1"
             type="number"
-            [(ngModel)]="item.quantity"
-            (change)="changeQuantity(item)"
-            #amountField="ngModel"
+            [ngModel]="item.quantity"
+            (change)="changeQuantity(amountField.value, item)"   
+            #amountField="ngModel"         
         /></span>
+        <button class="btn btn-primary" (click)="remove(item)">Remove</button>
       </div>
     </div>
     <h4>Total: ${{ checkoutInfo.total | number: "1.2-2" }}</h4>
   </div>
   <form #form="ngForm" (ngSubmit)="checkout()">
-    <label class="form-label">Full Name</label>
+    <label class="form-label">Full Name *</label>
     <br />
     <input
       name="fullName"
@@ -56,7 +57,7 @@
       Must contain at least 3 characters
     </span>
     <br />
-    <label class="form-label">Address</label>
+    <label class="form-label">Address *</label>
     <br />
     <input
       name="address"
@@ -90,13 +91,14 @@
       Must contain at least 6 characters
     </span>
     <br />
-    <label class="form-label">Credit card number</label>
+    <label class="form-label">Credit card number *</label>
     <br />
     <input
       name="creditCard"
       required
       minlength="16"
       maxlength="16"
+      pattern="[0-9]*"
       class="form-margin"
       type="text"
       [(ngModel)]="checkoutInfo.creditCard"
@@ -122,6 +124,16 @@
       "
     >
       Must contain 16 characters
+    </span>
+    <span
+      class="validation"
+      *ngIf="
+        creditCardField.invalid &&
+        creditCardField.dirty &&
+        creditCardField.errors!['pattern']
+      "
+    >
+      Must contain only numbers
     </span>
     <br />
     <input

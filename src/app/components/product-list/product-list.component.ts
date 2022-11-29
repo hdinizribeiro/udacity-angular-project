@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product-service.service';
-import { CartProduct } from 'src/models/CartProduct';
+import { CartItem } from 'src/models/CartProduct';
 import { Product } from 'src/models/Product';
 
 @Component({
@@ -22,7 +22,7 @@ export class ProductListComponent implements OnInit {
       .subscribe((products) => (this.products = products));
   }
 
-  addToCart(cartProduct: CartProduct) {
+  addToCart(cartProduct: CartItem) {
     this.cartService
       .add({
         productId: cartProduct.productId,

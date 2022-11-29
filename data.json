@@ -1,4 +1,5 @@
-[
+{
+  "products": [
     {
       "id": 1,
       "name": "Book",
@@ -47,4 +48,12 @@
       "description": "Wear it with style!",
       "stock": 9
     }
+  ],
+  "cart": [
+    {
+      "productId": 1,
+      "quantity": 1,
+      "id": 1
+    }
   ]
+}

@@ -2,8 +2,10 @@
   <img class="product-image" [src]="product.url" />
   <span>{{ product.name }}</span>
   <span>${{ product.price }}</span>
-  <select class="select-input">
-    <option *ngFor="let qty of createRange(product.stock)" [value]="qty">{{ qty }}</option>
+  <select class="select-input" [(ngModel)]="selectedQty">
+    <option *ngFor="let qty of createRange(product.stock)" [value]="qty">
+      {{ qty }}
+    </option>
   </select>
-  <button class="btn btn-primary">Add to cart</button>
+  <button class="btn btn-primary" (click)="addToCart()">Add to cart</button>
 </div>

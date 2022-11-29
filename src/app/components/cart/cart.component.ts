@@ -41,7 +41,7 @@ export class CartComponent implements OnInit {
   }
 
   changeQuantity(value: number, cartItem: CartItem) {
-    if (isNaN(value) || value <= 0) {
+    if (!this.ammountField.valid) {
       this.ammountField.reset(cartItem.quantity);
       return;
     }

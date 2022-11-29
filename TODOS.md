@@ -6,3 +6,4 @@
 [v] Implement item detail
 [] Mention that the json-server is being used in README.md file
 [v] Use output to add products to cart?
+[] Comment with the reviewer that I had to use (change) in the amount field

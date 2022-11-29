@@ -5,4 +5,4 @@
 [v] Fix to not allow duplicated products in cart
 [v] Implement item detail
 [] Mention that the json-server is being used in README.md file
-[] Use output to add products to cart?
+[v] Use output to add products to cart?

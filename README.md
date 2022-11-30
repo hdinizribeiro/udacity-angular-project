@@ -5,16 +5,32 @@ This is a project destinated to complete the angular module of FullStack Javascr
 
 ## Installation
 
-Run `npm install` to install package and dependencies
 Node version: 16.18.0
 Npm version: 8.19.2
 
-If you are using NVM run `nvm install` to install the required version.
+If you are using NVM, run `nvm install` to install the required version.
+
+Run `npm install` to install package and dependencies
 
 ## Development server
 
+### Run the local fake backend server
+
 This project includes **json-server** to provide a fake REST api.
-Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+Follow these steps to setup the local backend server:
+
+1 - Open a terminal
+
+2 - Access the root folder of the application
+
+3 - Run the command `npm run backend`
+
+Note: This command will block the terminal, open another terminal to run the angular application
+
+### Run the application
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Additional Info
 

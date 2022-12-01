@@ -13,10 +13,11 @@
             required
             min="1"
             max="10"
-            type="number"
+            type="number"            
             [ngModel]="item.quantity"
-            (change)="changeQuantity(amountField.value, item)"   
-            #amountField="ngModel"         
+            (ngModelChange)="validateAndSetAmountField($event, item)"
+            (change)="changeQuantity(amountField.value, item)"
+            #amountField="ngModel"
         /></span>
         <button class="btn btn-primary" (click)="remove(item)">Remove</button>
       </div>
@@ -98,11 +99,11 @@
       name="creditCard"
       required
       minlength="16"
-      maxlength="16"
-      pattern="[0-9]*"
+      maxlength="16"      
       class="form-margin"
       type="text"
       [(ngModel)]="checkoutInfo.creditCard"
+      (ngModelChange)="validateOnlyNumbers($event)"
       placeholder="(16-digit number)"
       #creditCardField="ngModel"
     />
@@ -129,9 +130,7 @@
     <span
       class="validation"
       *ngIf="
-        creditCardField.invalid &&
-        creditCardField.dirty &&
-        creditCardField.errors!['pattern']
+        noNumericCharInCreditCard
       "
     >
       Must contain only numbers

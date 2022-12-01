@@ -11,7 +11,9 @@ import { CheckoutInfo } from 'src/models/CheckoutInfo';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  @ViewChild('amountField') ammountField: NgModel = {} as NgModel;
+  noNumericCharInCreditCard: boolean = false;
+  
+  @ViewChild('amountField') amountField: NgModel = {} as NgModel;
   cartItems: CartItem[] = [];
   checkoutInfo: CheckoutInfo = {
     address: '',
@@ -42,12 +44,6 @@ export class CartComponent implements OnInit {
   }
 
   changeQuantity(value: number, cartItem: CartItem) {
-    if (!this.ammountField.valid) {
-      this.ammountField.reset(cartItem.quantity);
-      return;
-    }
-
-    cartItem.quantity = value;
     this.cartService
       .changeQuantity(cartItem.id ?? 0, cartItem.quantity)
       .subscribe({
@@ -79,6 +75,28 @@ export class CartComponent implements OnInit {
         }
       },
     });
+  }
+
+  validateAndSetAmountField(value: number, item: CartItem) {
+    debugger;
+    if (this.amountField.pristine) {
+      return;
+    }
+
+    if (this.amountField.valid) {
+      item.quantity = value;
+    } else {
+      this.amountField.reset(item.quantity);
+    }
+  }
+
+  validateOnlyNumbers($event: string) {
+    const regex = /^[0-9]*$/;
+    if (!regex.test($event)) {
+      this.noNumericCharInCreditCard = true;
+    } else {
+      this.noNumericCharInCreditCard = false;
+    }
   }
 
   private loadCartItems() {

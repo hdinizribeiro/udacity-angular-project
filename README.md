@@ -1,6 +1,5 @@
 # UdacityMyStore
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.8.
 This is a project destinated to complete the angular module of FullStack Javascritpt Developer nanodegree.
 
 ## Installation
@@ -31,6 +30,28 @@ Note: This command will block the terminal, open another terminal to run the ang
 ### Run the application
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+## Project structure
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.8.
+
+```
+src/
+├── app/
+├── ├── components/
+├── ├── layout/
+├── ├── services/
+├── assets/
+├── environments/
+├── models/
+```
+
+`src/app/components`: Contains all the components of the application including the ones used in the routing configuration
+`src/app/layout`: Contains the components related to the layout of the screen, like header, footer, etc...
+`src/app/services`: Contains the services class, responsible for everything that is not related to UI, like api calls, shared data, etc...
+`src/assets`: Contains common static assets (images, icons, etc.). 
+`src/environments`: Contains the configuration of the application for the different environments
+`src/models`: Contains the models of the application to enforce type in services, components, etc...
 
 ## Additional Info
 

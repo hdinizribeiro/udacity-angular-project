@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { concatAll, forkJoin, map, Observable } from 'rxjs';
+import { catchError, concatAll, forkJoin, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CartItem } from 'src/models/CartItem';
 

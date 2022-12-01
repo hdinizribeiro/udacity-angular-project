@@ -22,14 +22,14 @@ export class ProductListComponent implements OnInit {
       .subscribe((products) => (this.products = products));
   }
 
-  addToCart(cartProduct: CartItem) {
+  addToCart(item: CartItem) {
     this.cartService
       .add({
-        productId: cartProduct.productId,
-        quantity: cartProduct.quantity,
+        productId: item.productId,
+        quantity: item.quantity,
       })
       .subscribe(() => {
-        alert(`${cartProduct.product?.name} added to cart successfully`);
+        alert(`${item.product?.name} added to cart successfully`);
       });
   }
 }

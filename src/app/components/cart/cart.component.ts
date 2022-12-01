@@ -1,3 +1,4 @@
+import { HttpErrorResponse, HttpRequest } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { CartService } from 'src/app/services/cart.service';
@@ -49,14 +50,34 @@ export class CartComponent implements OnInit {
     cartItem.quantity = value;
     this.cartService
       .changeQuantity(cartItem.id ?? 0, cartItem.quantity)
-      .subscribe(() => {
-        this.calculateTotal();
+      .subscribe({
+        next: () => {
+          this.calculateTotal();
+        },
+        error: (e: HttpErrorResponse) => {
+          if (e.status == 404) {
+            alert('This product was removed from cart');
+            this.loadCartItems();
+          }
+        },
       });
   }
 
   remove(item: CartItem) {
-    this.cartService.remove(item.id ?? 0).subscribe(() => {
+    const successFeedback = () => {
+      alert(`${item.product?.name} removed from cart successfully`);
       this.loadCartItems();
+    };
+    this.cartService.remove(item.id ?? 0).subscribe({
+      next: () => {
+        successFeedback();
+      },
+      error: (e: HttpErrorResponse) => {
+        if (e.status == 404) {
+          successFeedback();
+          return;
+        }
+      },
     });
   }
 

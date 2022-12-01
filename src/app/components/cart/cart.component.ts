@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { CartService } from 'src/app/services/cart.service';
-import { CartItem } from 'src/models/CartProduct';
+import { CartItem } from 'src/models/CartItem';
 import { CheckoutInfo } from 'src/models/CheckoutInfo';
 
 @Component({

@@ -46,11 +46,18 @@ src/
 ├── models/
 ```
 
+`src/app/app-routing.module.ts`: Routing configuration of the application
+
 `src/app/components`: Contains all the components of the application including the ones used in the routing configuration
+
 `src/app/layout`: Contains the components related to the layout of the screen, like header, footer, etc...
+
 `src/app/services`: Contains the services class, responsible for everything that is not related to UI, like api calls, shared data, etc...
+
 `src/assets`: Contains common static assets (images, icons, etc.). 
+
 `src/environments`: Contains the configuration of the application for the different environments
+
 `src/models`: Contains the models of the application to enforce type in services, components, etc...
 
 ## Additional Info
